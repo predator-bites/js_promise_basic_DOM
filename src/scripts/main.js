@@ -2,8 +2,10 @@
 
 const element = document.querySelector('.logo');
 const body = document.querySelector('body');
+let resolveFn;
+
 const promise1 = new Promise((resolve) => {
-  resolve('Promise was resolved!');
+  resolveFn = resolve;
 });
 
 function addErrorElement(error) {
@@ -26,6 +28,8 @@ function addSuccessElement(value) {
 }
 
 element.addEventListener('click', (e) => {
+  resolveFn('Promise was resolved!');
+
   promise1.then((value) => addSuccessElement(value));
   promise1.catch((error) => addErrorElement(error.message));
 });
