@@ -2,6 +2,9 @@
 
 const element = document.querySelector('.logo');
 const body = document.querySelector('body');
+const promise1 = new Promise((resolve) => {
+  resolve('Promise was resolved!');
+});
 
 function addErrorElement(error) {
   const newElem = document.createElement('div');
@@ -23,14 +26,8 @@ function addSuccessElement(value) {
 }
 
 element.addEventListener('click', (e) => {
-  const promise1 = new Promise((resolve) => {
-    resolve('Promise was resolved!');
-  });
-
-  promise1.then(
-    (value) => addSuccessElement(value),
-    (error) => addErrorElement(error.message),
-  );
+  promise1.then((value) => addSuccessElement(value));
+  promise1.catch((error) => addErrorElement(error.message));
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,8 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   });
 
-  promise2.then(
-    (success) => addSuccessElement(success),
-    (error) => addErrorElement(error.message),
-  );
+  promise2.then((success) => addSuccessElement(success));
+  promise2.catch((error) => addErrorElement(error.message));
 });
